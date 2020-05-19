@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title> GH5050 visualisation </title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" ype="text/css" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/dc.css"/>
+        <link rel="stylesheet" type="text/css" href="css/leaflet.css"/>
+        <link rel="stylesheet" type="text/css" href="css/site.css"/>
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/d3.min.js"></script>
+        <script src="js/crossfilter.v1.min.js"></script>
+        <script src="js/dc.min.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/dc.leaflet.js"></script>
+
+    </head>
+    <body>
+      <div class="container-fluid" id='main-container'>
+        <div class='content'>
+          <div class='container'> 
+            <h4 style="padding-left: 0px">GH5050 visualisation</h4>
+            <div class="row">
+              
+               <div class="col-md-4"style="font-size: 15px; font-family: sans pro"> <b><font color="blue">49 </font></b> % all cases in men </div>
+               <div class="col-md-4" style="font-size: 15px; font-family: sans pro"> <b><font color="blue">137	</font> </b>Avg cases/100,000 men</div> 
+             <div class="col-md-4" style="font-size: 15px; font-family: sans pro"> <b><font color="blue">154</font></b> Avg cases/100,000 women
+             </div> 
+              </div>
+              
+           <div id="header" class="row" style="padding-top: 10px"></div>
+        
+            
+    <div class="row" style="padding-top: 10px">                           
+        <div class="col-md-6">
+             <img src="country.png" style ="width: 400px; height: 400px; text-align: center" > 
+        </div>  
+        <div class="col-md-6">                        
+              <img src="choropleth.png" style ="width: 500px; height: 400px" > 
+        </div>
+     </div>
+    <div class="row" style="padding-top: 10px">  
+        
+         <div class="col-md-6">
+              <img src="deaths.png" style ="width: 450px; height: 350px" >                         
+        </div>  
+        <div class="col-md-6">
+              <img src="cases.png" style ="width: 450px; height: 350px" >                         
+        </div>  
+         </div> 
+              <div class="row" style="padding-top: 10px">  
+                <div class="col-md-6">
+                     <img src="casesmen_females.png" style ="width: 500px; height: 350px" >   
+               </div>
+                  <div class="col-md-6">
+                       <img src="deaths_men_female.png" style ="width: 500px; height: 350px" > 
+                  </div>
+              </div>
+                        
+              <div id="header" class="row"></div>
+           </div>
+         </div>
+        </div>
+        <script src="js/bootstrap.min.js"></script>
+      <script src="js/site.js"></script>
+    </body>
+</html>
