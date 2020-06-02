@@ -1,19 +1,21 @@
 function generateringComponent(vardata, vargeodata){
 var lookup = genLookup(vargeodata) ;
 var Imap = dc.leafletChoroplethChart('#MapInform');
+var formatDecimal = d3.format(",.2f");
+
 //var dataTab1 = dc.dataTable('#dataTable2');
 //var dataTab2 = dc.dataTable('#dataTable1');
 var cf = crossfilter(vardata) ;
 var all = cf.groupAll();
 var mapDimension = cf.dimension(function(d) { return d.country_code});
-var mapGroup = mapDimension.group().reduceSum(function(d){ return d.projet});
+var mapGroup = mapDimension.group().reduceSum(function(d){ return d.ratio});
 
 dc.dataCount('#count-info')
   .dimension(cf)
   .group(all);
   
-   Imap.width(100)
-       .height(100)
+   Imap.width(1000)
+       .height(1000)
        .dimension(mapDimension)
        .group(mapGroup)
        .label(function (p) { return p.key; })
@@ -21,16 +23,18 @@ dc.dataCount('#count-info')
        .center([0,0])
        .zoom(0)
        .geojson(vargeodata)
-       .colors(['#DDDDDD', '#fff7bc', '#ffeda0', '#fec44f', '#d95f0e'])
+       .colors(['#D3D3D3', '#C0C0C0', '#A9A9A9', '#808080', '#696969'])
        .colorDomain([0,4])
        .colorAccessor(function (d){
         var c = 0
-           if (d>5) {
+           if (d>2) {
                  c = 5;
-               } else if (d>4) {
+               } else if (d>1.5) {
                     c = 4;
-               } else if (d>3){
+               } else if (d>1.1){
                   c = 3;
+                } else if (d>0.9){
+                  c = 2;
              
               } else if (d>0) {
                 c = 1;
@@ -40,9 +44,8 @@ dc.dataCount('#count-info')
        .featureKeyAccessor(function (feature){
           return feature.properties['country_code'];
           }).popup(function (d){
-          return '<h5>'+ d.properties['country_name'] +'</h5> '+'<b>'+'Nombre de projets'+'</b>';
-       })
-          
+          return '<h4>'+ d.properties['country_code']+ '</h4>'+'Ratio';
+       })  
         .renderPopup(true);
 //begin test
 function style(feature) {
@@ -72,28 +75,13 @@ function style(feature) {
       function zoomToGeom(geodata){
         var bounds = d3.geo.bounds(geodata) ;
         map.fitBounds([[bounds[0][1],bounds[0][0]],[bounds[1][1],bounds[1][0]]])
-            .setZoom(4)
+            /*.setZoom(4)
             .setView([9.80, 10.37], 4)
-            .dragging.disable();
-      }
+            .dragging.disable()*/;
+     } 
     map.keyboard.disable();
     
- var legend = L.control({position: 'topright'});
-
-    legend.onAdd = function (map) {
-
-        var div = L.DomUtil.create('div', 'info legend'),
-            labels = ['75 - 90','90 - 110','110 - 150 ','150+'];
-            colors =['#31a354','#addd8e','#f7fcb9','#ffeda0'];
-
-        div.innerHTML = '<br />Légende<br />';
-        for (var i = 0; i < labels.length; i++) {
-            div.innerHTML +=
-                '<i style="background:' + colors[i] + '"></i> ' + labels[3-i] +'<br />';
-        }
-        return div;
-    };
-     
+      
       function genLookup(geojson) {
         var lookup = {} ;
         geojson.features.forEach(function (e) {
@@ -111,7 +99,7 @@ var dataCall = $.ajax({
 
 var geomCall = $.ajax({
     type: 'GET',
-    url: 'data/faoCountry.geojson',
+    url: 'data/wa.geojson',
     dataType: 'json',
 });
 
