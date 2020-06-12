@@ -1,3 +1,31 @@
+function hxlProxyToJSON(input){
+    var output = [];
+    var keys=[];
+    input.forEach(function(e,i){
+        if(i==0){
+            e.forEach(function(e2,i2){
+                var parts = e2.split('+');
+                var key = parts[0];
+                if(parts.length>1){
+                    var atts = parts.splice(1,parts.length);
+                    atts.sort();                    
+                    atts.forEach(function(att){
+                        key +='+'+att;
+                    });
+                }
+                keys.push(key);
+            });
+        } else {
+            var row = {};
+            e.forEach(function(e2,i2){
+                row[keys[i2]] = e2;
+            });
+            output.push(row);
+        }
+    });
+    return output;
+}
+
 function generateringComponent(vardata, vargeodata){
 var lookup = genLookup(vargeodata) ;
 var Imap = dc.leafletChoroplethChart('#MapInform');
@@ -91,6 +119,36 @@ function style(feature) {
       }
 }
 
+function generateGlobalFigs (arr) {
+  $('#globalFigures').html('');
+  arr.forEach( function(element, index) {
+    $('#globalFigures').append('<div class="col-md-4"><div class="num">'+element['#value']+'</div><div class="indicator">'+element['#indicator']+'</div></div>');
+  }); 
+
+} //generateGlobalFigs
+
+var sexAndAgeDataLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=1186067706&single=true&output=csv';
+var clinicalDataLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=334578969&single=true&output=csv';
+var sexAndAgeData;
+var covidData;
+var historicData;
+var selectedCountry = 'Spain';
+
+function setOverallData() {
+  Promise.all([
+    d3.csv(sexAndAgeDataLink),
+    d3.csv(clinicalDataLink)
+  ]).then(function(data){
+    sexAndAgeData = data[0];
+    covidData = data[1];
+    countryCustomCharts()
+  });
+}//setOverallData
+
+function countryCustomCharts (countryname) {
+
+}//countryCustomCharts
+
 var dataCall = $.ajax({
     type: 'GET',
     url: 'data/InformData2.json',
@@ -103,11 +161,29 @@ var geomCall = $.ajax({
     dataType: 'json',
 });
 
-$.when(dataCall, geomCall).then(function(dataArgs, geomArgs){
+var figuresCall = $.ajax({
+    type: 'GET',
+    url: 'https://proxy.hxlstandard.org/data.json?dest=data_edit&strip-headers=on&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D548681856',
+    dataType: 'json',
+});
+
+$.when(dataCall, geomCall, figuresCall).then(function(dataArgs, geomArgs, figuresArgs){
     var geom = geomArgs[0];
     geom.features.forEach(function(e){
         e.properties['country_code'] = String(e.properties['country_code']);
     });
-    generateringComponent(dataArgs[0],geom);
+    // generateringComponent(dataArgs[0],geom);
+
+    var figuresData = hxlProxyToJSON(figuresArgs[0]);
+    
+    generateGlobalFigs(figuresData);
+    setOverallData();
+    // countryCustomCharts();
 });
-// testing
+
+
+
+
+
+
+
