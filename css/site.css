@@ -1,6 +1,8 @@
 body {
   color: #000;
   font-family: 'Source Sans Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
 
 }
 
@@ -13,22 +15,52 @@ h2{
   width: 860px;
 }
 
-#MapInform{
+
+#map{
     height:500px;
     width:100%;
     
 }
 
-.col-md-4 {
-  padding-bottom: 5px;
+.keyfig {
+  /*border-bottom: solid;*/
+  /*width: 80%;*/
 }
+
 #globalFigures {
-  font-size: 14px;
-  text-align: center;
-  line-height: 14px;
+  /*text-align: center;*/
   text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
 .num {
-
+  font-size: 26px;
 }
+.indicator{
+  text-decoration: underline;
+}
+.carte {
+  margin-top: 10px;
+}
+/* css to customize Leaflet default styles  */
+.custom .leaflet-popup-tip,
+.custom .leaflet-popup-content-wrapper {
+    /*background: #e93434;*/
+/*    color: #ffffff;
+    minWidth: 50px;
+    minHeight:50px;*/
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+

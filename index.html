@@ -7,37 +7,35 @@
         
         <link rel="stylesheet" href="css/bootstrap.min.css"> 
 
-        <link rel="stylesheet" type="text/css" href="css/dc.css"/>
-        <link rel="stylesheet" type="text/css" href="css/leaflet.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.15/c3.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css"/>
         <link rel="stylesheet" type="text/css" href="css/site.css"/>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
         
         <script src="https://d3js.org/d3.v5.js"></script>
-
-        <!-- <script src="js/d3.min.js"></script> -->
-        <!-- <script src="js/crossfilter.v1.min.js"></script> -->
-        <!-- <script src="js/dc.min.js"></script> -->
-        <script src="js/leaflet.js"></script>
-        <!-- <script src="js/dc.leaflet.js"></script> -->
-        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.15/c3.min.js"></script>
+     
 
     </head>
     <body>
       <div class="container">
-        <h2>GH5050 coronavirus-covid-19 visualisation</h2>
+        <h2>GLOBAL HEALTH 50/50 covid-19</h2>
         <div class="row">
           <div id="globalFigures"></div>
         </div>
 
-        <div class="row">
-          <div id="MapInform"></div>
+        <div class="row carte">
+          <div id="map"></div>
         </div>
         <div class="row">
-          <div id="customCountry"></div>
+          <div class="country"></div>
+          <div id="saddBarchart"></div>
+          <div id="covidCharts"></div>
+          <div id="historicChart"></div>
         </div>
         
       </div>
