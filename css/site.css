@@ -1,3 +1,42 @@
+
+/*loader */
+
+.loader {
+  color: #000;
+  font-size: 11px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sp {
+  clear: both;
+  height: 32px;
+  margin: 0 auto 5px;
+  width: 32px;
+}
+
+/* Spinner Circle Rotation */
+.sp-circle {
+  border: 4px rgba(0,0,0,0.25) solid;
+  border-top: 4px rgba(0,0,0,1) solid;
+  border-radius: 50%;
+  -webkit-animation: spCircRot .6s infinite linear;
+  animation: spCircRot .6s infinite linear;
+}
+@-webkit-keyframes spCircRot {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(359deg); }
+}
+@keyframes spCircRot {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(359deg); }
+}
+
+
+
 body {
   color: #000;
   font-family: 'Source Sans Pro', sans-serif;
@@ -6,22 +45,43 @@ body {
 
 }
 
+h1{
+  font-size: 19px;
+  font-weight: 400;
+  text-decoration: underline;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0;
+}
+
 h2{
   text-align: center;
   /*font-size: 16px;*/
+  margin: 5px 0 5px;
+}
+
+h5 {
+  margin: 0;
+  font-weight: bold;
 }
 
 .container {
   width: 860px;
 }
 
+.container, .container-fluid {
+  opacity: 0;
+}
 
 #map{
-    height:500px;
+    height:480px;
     width:100%;
     
 }
 
+.small {
+  font-style: italic;
+}
 .keyfig {
   /*border-bottom: solid;*/
   /*width: 80%;*/
@@ -42,14 +102,14 @@ h2{
 .carte {
   margin-top: 10px;
 }
-/* css to customize Leaflet default styles  */
+/* css to customize Leaflet default styles  
 .custom .leaflet-popup-tip,
 .custom .leaflet-popup-content-wrapper {
     /*background: #e93434;*/
 /*    color: #ffffff;
     minWidth: 50px;
-    minHeight:50px;*/
-}
+    minHeight:50px;
+}*/
 
 .legend {
     line-height: 18px;
@@ -63,4 +123,24 @@ h2{
     opacity: 0.7;
 }
 
+
+.container-fluid{
+  background-color: #353535;
+  color: #FFF;
+  padding: 0;
+  margin-top: 10px;
+}
+
+
+.logos {
+  padding-top: 5px;
+  text-align: center;
+}
+
+img {
+    margin-right: 40px;
+    margin-bottom: 10px;
+    vertical-align: top;
+    width: auto;
+}
 

@@ -19,27 +19,53 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.15/c3.min.js"></script>
      
-
     </head>
     <body>
+
+      <div class='loader'>
+        <div class="sp sp-circle"></div>
+        Loading data...
+      </div>
+
       <div class="container">
-        <h2>GLOBAL HEALTH 50/50 covid-19</h2>
+        <h1>GLOBAL HEALTH 50/50 covid-19</h1>
         <div class="row">
           <div id="globalFigures"></div>
         </div>
 
         <div class="row carte">
+          <h5>Map - comparing mortality rates in men and women</h6>
+          <span>This map compares the mortality rate (here taken as the proportion of deaths among confirmed cases) in women and men. In almost all countries where data is available, it appears men are dying at a higher rate once infected with COVID-19. Click on a country for more info.
+          </span>
           <div id="map"></div>
+          <p class="small">
+            The boundaries and names shown and the designations used on this map do not imply official endorsement or acceptance by the United Nations.
+          </p>
         </div>
+
         <div class="row">
           <div class="country"></div>
           <div id="saddBarchart"></div>
           <div id="covidCharts"></div>
           <div id="historicChart"></div>
         </div>
-        
+      
       </div>
       
+      <div class="container-fluid">
+
+        <footer class="footer">
+          <div class='logos'>
+                <a href='https://www.unocha.org' target='_blank'>
+                  <img height='30' src='img/logo-ocha-gray.png'>
+                </a>
+                <a href='https://centre.humdata.org' target='_blank'>
+                  <img height='38' src='img/logo-centre-gray.png'>
+                </a>
+          </div>
+        </footer>
+
+      </div>
       <script src="js/site.js"></script>
     </body>
 </html>

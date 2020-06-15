@@ -29,7 +29,9 @@ $( document ).ready(function() {
 
   var customOptions = {
       'className' : 'custom',
-      'closeButton': false
+      'closeButton': false,
+      'maxWidth': '250',
+      'maxHeight': '150'
     };
 
   var sexAndAgeChart,
@@ -110,7 +112,8 @@ $( document ).ready(function() {
 
   function createMap (geodata) {
     map = L.map('map',
-    {
+    { 
+        zoomSnap: 0.25,
         maxZoom: 20,
         // minZoom: 2
     });
@@ -119,6 +122,8 @@ $( document ).ready(function() {
         attribution: '<a href="http://mapbox.com">Mapbox</a>'
     }).addTo(map); 
     
+    map.setView([9.58, 10.37], 3);
+
     geojson = L.geoJson(geodata,
               { 
                 style:style,
@@ -131,11 +136,11 @@ $( document ).ready(function() {
     legend.onAdd = function(map){
       var div = L.DomUtil.create('div', 'info legend'),
       grades = [darkest, mediumDark, mediumLight, light, white, otherColor],
-      labels = ['Mortality rates among cases are 2x or higher in men (ratio over 2.0)',
-                'Mortality rates are 50-99% higher in men (ratio 1.5-1.99)',
-                'Mortality rates among men are 10-49% higher in men (ratio 1.1-1.49)',
-                'Mortality rates are between 10% lower and 9% higher in men than in women (ratio .9-1.09)',
-                'Mortality rates are 11% or higher among women (ratio <.89)',
+      labels = ['ratio over 2.0',
+                'ratio 1.5-1.99',
+                'ratio 1.1-1.49',
+                'ratio .9-1.09',
+                'ratio <.89',
                 'other'];
 
 
@@ -149,6 +154,7 @@ $( document ).ready(function() {
     };
 
     legend.addTo(map);
+    map.setZoom(1);
 
   } // createMap()
 
@@ -468,6 +474,10 @@ $( document ).ready(function() {
 
 
   getData();
+    //remove loader and show vis
+  $('.loader').hide();
+  $('.container').css('opacity', 1);
+  $('.container-fluid').css('opacity', 1);
 
 }); //fin
 
