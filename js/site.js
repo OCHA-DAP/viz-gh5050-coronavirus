@@ -3,11 +3,13 @@ $( document ).ready(function() {
   const worldGeojson = 'data/countries.geo.json';
   var sexAndAgeDataLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=1186067706&single=true&output=csv';
   var latestLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=1108400769&single=true&output=csv';
+  var historicDataLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=1699147458&single=true&output=csv';
   
   var geodata;
   var sexAndAgeData;
   var covidData;
   var chiffresCles;
+  var historicData;
 
   var map;
 
@@ -36,7 +38,9 @@ $( document ).ready(function() {
 
   var sexAndAgeChart,
       casesByChart,
-      deathsByChart;
+      deathsByChart,
+      historicCasesChart,
+      historicDeathsChart;
 
   var sexAndAgeDataArrMen = ['Men'],
       sexAndAgeDataArrWomen = ['Women'];
@@ -52,13 +56,26 @@ $( document ).ready(function() {
   var deathsMen = [],
       deathsWomen = [];
 
+  // historic cases and deaths chart
+  var historicXaxis = [];
+  var hCasesMen = [],
+      hCasesWomen = [];
+  var hDeathsMen = [],
+      hDeathsWomen = [];
+
+  var date_sort = function (d1, d2) {
+      if (d1[' Date data is accurate until'] > d2[' Date data is accurate until']) return 1;
+      if (d1[' Date data is accurate until'] < d2[' Date data is accurate until']) return -1;
+      return 0;
+    }
 
   function getData() {
     Promise.all([
       d3.csv(keyfiguresLink),
       d3.json(worldGeojson),
       d3.csv(sexAndAgeDataLink),
-      d3.csv(latestLink)
+      d3.csv(latestLink),
+      d3.csv(historicDataLink)
     ]).then(function(data){
         chiffresCles = data[0];
         geodata = data[1];
@@ -101,10 +118,20 @@ $( document ).ready(function() {
         });
         covidData = data[3];
 
+        data[4].forEach( function(element, index) {
+          element[' Country'] = element[' Country'].toUpperCase();
+          element[' Date data is accurate until'] = new Date(element[' Date data is accurate until']);
+          element[' % cases (men)'] = +((element[" % cases (men)"]).split('%')[0]);
+          element[' % cases (female)'] = +((element[" % cases (female)"]).split('%')[0]);
+
+          element[' % deaths (male)'] = +((element[" % deaths (male)"]).split('%')[0]);
+          element[' % deaths (female)'] = +((element[" % deaths (female)"]).split('%')[0]);
+        });
+        historicData = data[4];
+        
         generateGlobalFigs(chiffresCles)
         createMap(geodata)
-        // console.log(sexAndAgeData)
-        console.log(covidData)
+
         
     });
   }
@@ -267,6 +294,9 @@ $( document ).ready(function() {
     if (countries.includes(pays)) {
       getSexAndAgeData(pays);
       dessinerGrapheSexAndAge();
+
+      getHistoricData(pays);
+      dessinerHistoricCharts()
     }
     
     if (covidCountries.includes(pays)) {
@@ -324,6 +354,36 @@ $( document ).ready(function() {
     });
 
   }//getCovidSexAndAgeData
+
+  function getHistoricData (pays) {
+    historicXaxis = ['x'];
+
+    hCasesMen = [' % cases (men)'];
+    hCasesWomen = [' % cases (female)'];
+
+    hDeathsMen = [' % deaths (male)'];
+    hDeathsWomen = [' % deaths (female)'];
+
+    var countryData = historicData.filter(function(d){
+      return d[' Country'] == pays;
+    });
+
+    countryData.forEach( function(element, index) {
+      var d = element[' Date data is accurate until'];
+      var date = d.getFullYear() +'-'+d.getMonth()+'-'+d.getDay();
+      element[' Date data is accurate until'] = date;
+    });
+
+    countryData.forEach( function(element, index) {
+      historicXaxis.push(element[' Date data is accurate until']);
+      hCasesMen.push(element[' % cases (men)']);
+      hCasesWomen.push(element[' % cases (female)']);
+
+      hDeathsMen.push(element[' % deaths (male)']);
+      hDeathsWomen.push(element[' % deaths (female)']);
+    });
+
+  }//getHistoricData
 
   function dessinerGrapheSexAndAge (arr) {
   
@@ -407,7 +467,7 @@ $( document ).ready(function() {
         },
         y: {
           tick: {
-            format: d3.format('d'),
+            format: d3.format(".2s"),
             count: 5,
             outer:false
           }
@@ -452,7 +512,7 @@ $( document ).ready(function() {
         },
         y: {
           tick: {
-            format: d3.format('d'),
+            format: d3.format(".2s"),
             count: 5,
             outer:false
           }
@@ -472,6 +532,80 @@ $( document ).ready(function() {
 
   }//dessinerCovidCharts
 
+  function dessinerHistoricCharts () {
+     $('#historicChart').html('');
+     $('#historicChart').append('<div class="row"><div class="col-md-6"><div id="historicCases"></div></div><div class="col-md-6"><div id="historicDeath"></div></div></div>');
+      
+      // cases chart
+      historicCasesChart = c3.generate({
+        bindto: '#historicCases',
+        size: {height: 200},
+        padding: {top: 10},
+        title: {
+          text: 'Cases - Historical trends',
+          position: 'upper-left'
+        },
+        data: {
+            x: 'x',
+            type: 'line',
+            columns: [historicXaxis, hCasesMen, hCasesWomen],
+        },
+        color: {
+          pattern: [covidMen, covidWomen]
+        },
+        axis: {
+          x: {
+            type: 'timeseries',
+            localtime: false,
+            tick: {
+              format: '%b %Y'
+            }
+          },
+          y: {
+            tick: {
+              count: 5,
+              format: d3.format('d')
+            }
+          }
+        }
+      });
+
+    // deaths chart
+      deathsByChart = c3.generate({
+        bindto: '#historicDeath',
+        size: {height: 200},
+        padding: {top: 10},
+        title: {
+          text: 'Deaths - Historical trends',
+          position: 'center'
+        },
+        data: {
+            x: 'x',
+            type: 'line',
+            columns: [historicXaxis, hDeathsMen, hDeathsWomen],
+        },
+        color: {
+          pattern: [covidMen, covidWomen]
+        },
+        axis: {
+          x: {
+            type: 'category',
+            // localtime: false,
+            tick: {
+              format: '%b %Y',
+              multiline: false
+            }
+          },
+          y: {
+            tick: {
+              count: 5,
+              format: d3.format('d')
+            }
+          }
+        }
+      });
+
+  }//dessinerHistoricCharts
 
   getData();
     //remove loader and show vis
