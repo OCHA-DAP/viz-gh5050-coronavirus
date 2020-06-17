@@ -290,18 +290,33 @@ $( document ).ready(function() {
     $('.country').html('');
     $('.country').append("<h2>"+pays+"</h2>");
     
+    $('#covidCharts').html('');
+    $('#covidCharts').append('<div class="row"><div class="col-md-6"><div id="casesByAge"></div></div><div class="col-md-6"><div id="deathsByAge"></div></div></div>');
+
+    $('#historicChart').html('');
+    $('#historicChart').append('<div class="row"><div class="col-md-6"><div id="historicCases"></div></div><div class="col-md-6"><div id="historicDeath"></div></div></div>');
+
     pays = pays.toUpperCase();
+
     if (countries.includes(pays)) {
       getSexAndAgeData(pays);
       dessinerGrapheSexAndAge();
 
       getHistoricData(pays);
       dessinerHistoricCharts()
+    } else {
+      // sexAndAgeChart = null;
+      // historicCasesChart = null;
+      // deathsByChart = null;
     }
     
     if (covidCountries.includes(pays)) {
       getCovidSexAndAgeData(pays);
       dessinerCovidCharts();
+    } else {
+      // casesByChart = null;
+      // deathsByChart = null;
+
     }
     
   }//graphesPays
@@ -373,7 +388,9 @@ $( document ).ready(function() {
       var date = d.getFullYear() +'-'+d.getMonth()+'-'+d.getDay();
       element[' Date data is accurate until'] = date;
     });
+
     countryData.sort(date_sort);
+
     countryData.forEach( function(element, index) {
       historicXaxis.push(element[' Date data is accurate until']);
       hCasesMen.push(element[' % cases (men)']);
@@ -435,8 +452,8 @@ $( document ).ready(function() {
 
 
   function dessinerCovidCharts (arr) {
-     $('#covidCharts').html('');
-     $('#covidCharts').append('<div class="row"><div class="col-md-6"><div id="casesByAge"></div></div><div class="col-md-6"><div id="deathsByAge"></div></div></div>');
+     // $('#covidCharts').html('');
+     // $('#covidCharts').append('<div class="row"><div class="col-md-6"><div id="casesByAge"></div></div><div class="col-md-6"><div id="deathsByAge"></div></div></div>');
 
      // $('#covidCharts').append('<div class="row"><h3>Covid cases and deaths by age and sex</h3><div class="col-md-6"><div id="casesByAge"></div></div><div class="col-md-6"><div id="deathsByAge"></div></div></div>');
 
@@ -533,8 +550,8 @@ $( document ).ready(function() {
   }//dessinerCovidCharts
 
   function dessinerHistoricCharts () {
-     $('#historicChart').html('');
-     $('#historicChart').append('<div class="row"><div class="col-md-6"><div id="historicCases"></div></div><div class="col-md-6"><div id="historicDeath"></div></div></div>');
+     // $('#historicChart').html('');
+     // $('#historicChart').append('<div class="row"><div class="col-md-6"><div id="historicCases"></div></div><div class="col-md-6"><div id="historicDeath"></div></div></div>');
       
       // cases chart
       historicCasesChart = c3.generate({
