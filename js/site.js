@@ -373,7 +373,7 @@ $( document ).ready(function() {
       var date = d.getFullYear() +'-'+d.getMonth()+'-'+d.getDay();
       element[' Date data is accurate until'] = date;
     });
-
+    countryData.sort(date_sort);
     countryData.forEach( function(element, index) {
       historicXaxis.push(element[' Date data is accurate until']);
       hCasesMen.push(element[' % cases (men)']);
@@ -555,10 +555,11 @@ $( document ).ready(function() {
         },
         axis: {
           x: {
-            type: 'timeseries',
+            type: 'category',//'timeseries',
             localtime: false,
             tick: {
-              format: '%b %Y'
+              format: '%b %Y',
+              multiline: false
             }
           },
           y: {
