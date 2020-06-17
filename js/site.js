@@ -367,15 +367,10 @@ $( document ).ready(function() {
 
     hDeathsMen = [' % deaths (male)'];
     hDeathsWomen = [' % deaths (female)'];
-    console.log(historicData)
     var countryData = historicData.filter(function(d){
       d[' Date data is accurate until'] = new Date(d[' Date data is accurate until']);
       return d[' Country'] == pays;
     });
-    console.log("country data avant parsing date")
-    console.log(countryData)
-    // console.log("apres filtere de historic data")
-    // console.log(historicData)
 
     countryData.forEach( function(element, index) {
       var d = new Date(element[' Date data is accurate until']);
@@ -384,6 +379,7 @@ $( document ).ready(function() {
     });
 
     countryData.sort(date_sort);
+
     countryData.forEach( function(element, index) {
       historicXaxis.push(element[' Date data is accurate until']);
       hCasesMen.push(element[' % cases (men)']);
@@ -439,6 +435,13 @@ $( document ).ready(function() {
           width: {
               ratio: 0.5 // this makes bar width 50% of length between ticks
           }
+      },
+      tooltip:{
+        format: {
+          value: function(value){
+            return value + " %";
+          }
+        }
       }
     });
 
@@ -566,10 +569,10 @@ $( document ).ready(function() {
         },
         axis: {
           x: {
-            type: 'category',//'timeseries',
+            type: 'timeseries',
             localtime: false,
             tick: {
-              format: '%b %Y',
+              format: '%b %Y',//'%Y-%m-%d',//'%b %Y',
               multiline: false
             }
           },
@@ -577,6 +580,14 @@ $( document ).ready(function() {
             tick: {
               count: 5,
               format: d3.format('d')
+            }
+          }
+        },
+        tooltip:{
+          format:{
+            title: function(d){
+              var date = d.getFullYear() +'-'+(d.getMonth() + 1) +'-'+d.getDate();
+              return date;
             }
           }
         }
@@ -601,8 +612,8 @@ $( document ).ready(function() {
         },
         axis: {
           x: {
-            type: 'category',
-            // localtime: false,
+            type: 'timeseries',
+            localtime: false,
             tick: {
               format: '%b %Y',
               multiline: false
@@ -612,6 +623,14 @@ $( document ).ready(function() {
             tick: {
               count: 5,
               format: d3.format('d')
+            }
+          }
+        },
+        tooltip:{
+          format:{
+            title: function(d){
+              var date = d.getFullYear() +'-'+(d.getMonth() + 1) +'-'+d.getDate();
+              return date;
             }
           }
         }
