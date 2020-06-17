@@ -243,12 +243,12 @@ $( document ).ready(function() {
           casesWomen = element[" % cases (female)"];
           deathsMen = element[" % deaths (male)"];
           deathsWomen = element[" % deaths (female)"];
-          ration = element[" Ratio - confirmed cases that have died (m:f)"];
+          ratio = element[" Ratio - confirmed cases that have died (m:f)"];
         }
       });
       pop += "<p>Cases in men/women (%): "+casesMen+"/"+casesWomen+"</p>";
       pop += "<p>Deaths in men/women (%): "+deathsMen+"/"+deathsWomen+"</p>";
-      pop += "<p>Ratio deaths among confirmed cases in men:women"+ratio+"</p>";
+      pop += "<p>Ratio deaths among confirmed cases in men-women: "+ratio+"</p>";
     } else {
       pop += "<span> Data partially available</span>"
     }
