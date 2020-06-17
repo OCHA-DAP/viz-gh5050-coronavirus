@@ -89,7 +89,7 @@ $( document ).ready(function() {
 
           covidCountries.includes(element['Country']) ? '': covidCountries.push(element['Country']);
         });
-
+        // console.log(covidCountries)
         sexAndAgeData = data[2];
         
 
@@ -127,8 +127,9 @@ $( document ).ready(function() {
           element[' % deaths (male)'] = +((element[" % deaths (male)"]).split('%')[0]);
           element[' % deaths (female)'] = +((element[" % deaths (female)"]).split('%')[0]);
         });
+
         historicData = data[4];
-        
+        // console.log(historicData)
         generateGlobalFigs(chiffresCles)
         createMap(geodata)
 
@@ -289,12 +290,8 @@ $( document ).ready(function() {
   function graphesPays (pays) {
     $('.country').html('');
     $('.country').append("<h2>"+pays+"</h2>");
-    
     $('#covidCharts').html('');
-    $('#covidCharts').append('<div class="row"><div class="col-md-6"><div id="casesByAge"></div></div><div class="col-md-6"><div id="deathsByAge"></div></div></div>');
-
     $('#historicChart').html('');
-    $('#historicChart').append('<div class="row"><div class="col-md-6"><div id="historicCases"></div></div><div class="col-md-6"><div id="historicDeath"></div></div></div>');
 
     pays = pays.toUpperCase();
 
@@ -304,20 +301,12 @@ $( document ).ready(function() {
 
       getHistoricData(pays);
       dessinerHistoricCharts()
-    } else {
-      // sexAndAgeChart = null;
-      // historicCasesChart = null;
-      // deathsByChart = null;
-    }
+    } 
     
     if (covidCountries.includes(pays)) {
       getCovidSexAndAgeData(pays);
       dessinerCovidCharts();
-    } else {
-      // casesByChart = null;
-      // deathsByChart = null;
-
-    }
+    } 
     
   }//graphesPays
 
@@ -378,19 +367,23 @@ $( document ).ready(function() {
 
     hDeathsMen = [' % deaths (male)'];
     hDeathsWomen = [' % deaths (female)'];
-
+    console.log(historicData)
     var countryData = historicData.filter(function(d){
+      d[' Date data is accurate until'] = new Date(d[' Date data is accurate until']);
       return d[' Country'] == pays;
     });
+    console.log("country data avant parsing date")
+    console.log(countryData)
+    // console.log("apres filtere de historic data")
+    // console.log(historicData)
 
     countryData.forEach( function(element, index) {
-      var d = element[' Date data is accurate until'];
-      var date = d.getFullYear() +'-'+d.getMonth()+'-'+d.getDay();
+      var d = new Date(element[' Date data is accurate until']);
+      var date = d.getFullYear() +'-'+(d.getMonth() + 1) +'-'+d.getDate();
       element[' Date data is accurate until'] = date;
     });
 
     countryData.sort(date_sort);
-
     countryData.forEach( function(element, index) {
       historicXaxis.push(element[' Date data is accurate until']);
       hCasesMen.push(element[' % cases (men)']);
@@ -402,6 +395,7 @@ $( document ).ready(function() {
 
   }//getHistoricData
 
+  // dessiner Sex-disaggregated data along the COVID-19 clinical pathway
   function dessinerGrapheSexAndAge (arr) {
   
     sexAndAgeChart = c3.generate({
@@ -453,7 +447,7 @@ $( document ).ready(function() {
 
   function dessinerCovidCharts (arr) {
      // $('#covidCharts').html('');
-     // $('#covidCharts').append('<div class="row"><div class="col-md-6"><div id="casesByAge"></div></div><div class="col-md-6"><div id="deathsByAge"></div></div></div>');
+     $('#covidCharts').append('<div class="row"><div class="col-md-6"><div id="casesByAge"></div></div><div class="col-md-6"><div id="deathsByAge"></div></div></div>');
 
      // $('#covidCharts').append('<div class="row"><h3>Covid cases and deaths by age and sex</h3><div class="col-md-6"><div id="casesByAge"></div></div><div class="col-md-6"><div id="deathsByAge"></div></div></div>');
 
@@ -551,7 +545,7 @@ $( document ).ready(function() {
 
   function dessinerHistoricCharts () {
      // $('#historicChart').html('');
-     // $('#historicChart').append('<div class="row"><div class="col-md-6"><div id="historicCases"></div></div><div class="col-md-6"><div id="historicDeath"></div></div></div>');
+     $('#historicChart').append('<div class="row"><div class="col-md-6"><div id="historicCases"></div></div><div class="col-md-6"><div id="historicDeath"></div></div></div>');
       
       // cases chart
       historicCasesChart = c3.generate({
