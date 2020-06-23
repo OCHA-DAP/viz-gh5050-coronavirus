@@ -131,7 +131,7 @@ $( document ).ready(function() {
           element[' % deaths (male)'] = +((element[" % deaths (male)"]).split('%')[0]);
           element[' % deaths (female)'] = +((element[" % deaths (female)"]).split('%')[0]);
         });
-
+        console.log(data[4])
         historicData = data[4];
         // console.log(historicData)
         generateGlobalFigs(chiffresCles)
@@ -252,6 +252,7 @@ $( document ).ready(function() {
           ratio = element[" Ratio - confirmed cases that have died (m:f)"];
         }
       });
+      ratio == 0 ? ratio = 'NA' : '';
       pop += "<p>Cases in men/women (%): "+casesMen+"/"+casesWomen+"</p>";
       pop += "<p>Deaths in men/women (%): "+deathsMen+"/"+deathsWomen+"</p>";
       pop += "<p>Ratio deaths among confirmed cases in men-women: "+ratio+"</p>";
