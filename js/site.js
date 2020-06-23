@@ -110,16 +110,17 @@ $( document ).ready(function() {
           element[" No tests (women)"] = +element[" No tests (women)"];
           
           element[" % Hospitalised (male)"] = +((element[" % Hospitalised (male)"]).split('%')[0]);
-          element[" % Hospitalised (female)"] = 100 - element[" % Hospitalised (male)"];
+          element[" % Hospitalised (female)"] = +((element[" % Hospitalised (female)"]).split('%')[0]);
           
           element[" % ICU (male)"] = +((element[" % ICU (male)"]).split('%')[0]);
-          element[" % ICU (female)"] = 100 - element[" % ICU (male)"]; 
+          element[" % ICU (female)"] = +((element[" % ICU (female)"]).split('%')[0]);
           
           element[" % Healthcare workers (female)"] = +((element[" % Healthcare workers (female)"]).split('%')[0]);
-          element[" % Healthcare workers (male)"] = 100 - element[" % Healthcare workers (female)"];
+          element[" % Healthcare workers (male)"] = +((element[" % Healthcare workers (male)"]).split('%')[0]);
 
           countries.push(pays.trim());
         });
+        console.log(data[3])
         covidData = data[3];
 
         data[4].forEach( function(element, index) {
@@ -131,7 +132,7 @@ $( document ).ready(function() {
           element[' % deaths (male)'] = +((element[" % deaths (male)"]).split('%')[0]);
           element[' % deaths (female)'] = +((element[" % deaths (female)"]).split('%')[0]);
         });
-        console.log(data[4])
+        
         historicData = data[4];
         // console.log(historicData)
         generateGlobalFigs(chiffresCles)
