@@ -29,29 +29,60 @@
       </div>
 
       <div class="container">
-        <h1>GLOBAL HEALTH 50/50 covid-19</h1>
+<!--         <h2> Sex, Gender and COVID-19
+        Tracking national differences in COVID-19 cases, illness and death among women and men</h2>
+        <p></p>
         <div class="row">
           <div id="globalFigures"></div>
+        </div> -->
+
+        <div class="row">
+          <div class="col-md-12">
+          <h4 class="header">Sex, Gender and COVID-19: Tracking national differences in COVID-19 cases, illness and death among women and men</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          
+          <div class="col-md-9">
+            <h5>Findings of the Global Health 50/50 Sex-Disaggregated COVID-19 Data Tracker</h5>
+            <p>
+              From the first reports of the novel coronavirus, COVID-19, there has been consistent evidence of a gendered impact on health outcomes.<br>
+              In many settings, women appear to be slightly more likely to be diagnosed with COVID-19, which may in part be due to the fact that women account for the majority of health care workers around the world. At the same time, there is a consistent pattern of higher death rates recorded among men compared to women. This pattern seems to be repeated in nearly every countries’ reporting.<br>
+              The Global Health 50/50 COVID-19 Data Tracker has been collating sex-disaggregated COVID-19 data reported by national governments since March 2020. This includes data on confirmed cases, hospitalizations, ICU admissions and deaths. We are also tracking data on cases and deaths by age, as well as infections among healthcare workers.<br> 
+              Many countries do not report COVID-19 cases, deaths and other data disaggregated by sex. These gaps are reflected in the missing data below.<br>
+              For more information and to download the data, visit <a href="https://globalhealth5050.org/covid19/" target="_blank">https://globalhealth5050.org/covid19/</a>
+            </p>
+          </div>
+
+          <div class="col-md-3">
+            <h5>Key Figures</h5>
+            <div id="globalFigures"></div>
+          </div>
+          
         </div>
 
         <div class="row carte">
-          <h5>Map - comparing mortality rates in men and women</h6>
-          <span>This map compares the mortality rate (here taken as the proportion of deaths among confirmed cases) in women and men. In almost all countries where data is available, it appears men are dying at a higher rate once infected with COVID-19. Click on a country for more info.
-          </span>
-          <div id="map"></div>
-          <p class="small">
-            The boundaries and names shown and the designations used on this map do not imply official endorsement or acceptance by the United Nations.
-          </p>
+          <div class="col-md-12 col-sm-12"> 
+            <h5 class="header">Mortality rates in men and women across countries<span class="pull-right"> <a href="https://data.humdata.org/dataset/covid-19-sex-disaggregated-data-tracker" target="_blank">Dataset available on HDX</a></span></h5>
+            <p>This map compares COVID-19 mortality rates (here taken as the proportion of deaths among confirmed cases) in women and men. Given a range of limiting factors, including differences in national surveillance strategies and capacity, and that countries are at different stages in their epidemics, using the data to compare country experiences should be done with caution. 
+            </p>
+            <div id="map"></div>
+            <p class="small">
+              The boundaries and names shown and the designations used on this map do not imply official endorsement or acceptance by the United Nations.
+            </p>
+          </div>
         </div>
 
         <div class="row">
-          <div class="country"></div>
-          <div id="saddBarchart"></div>
-          <div id="covidCharts"></div>
-          <div id="historicChart"></div>
+          <div class="col-md-12 col-xs-12">
+            <div class="country"></div>
+            <div id="saddBarchart"></div>
+            <div id="covidCharts"></div>
+            <div id="historicChart"></div>
+          </div>
         </div>
-      
-      </div>
+      </div> <!-- container -->
       
       <div class="container-fluid">
 
@@ -66,7 +97,7 @@
           </div>
         </footer>
 
-      </div>
+      </div> <!-- container-fluid -->
       <script src="js/site.js"></script>
     </body>
 </html>

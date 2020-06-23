@@ -17,15 +17,16 @@ $( document ).ready(function() {
       covidCountries = [];
 
   // colors 
-  var darkest = '#800026';
-  var mediumDark = '#FEB24C' ;
+  var darkest = '#772d2b';//'#800026';
+  var mediumDark = '#a84a4a';//#FEB24C' ;
   var mediumLight = '#E31A1C';
-  var light = '#FC4E2A';
-  var white = '#FD8D3C';
-  var otherColor = '#FFEDA0';
+  var medium = '#F17471';//#FC4E2A';
+  var light = '#ecba78';//'#FD8D3C';
+  var lighter = '#f7e7b3';
+  var noColor = '#dadada';//'#FFEDA0';
 
-  var colorMen = '#49707b';
-  var colorWomen = '#d44e3f'; 
+  var colorMen = '#a84a4a';//'#49707b';
+  var colorWomen = '#ecba78';//'#d44e3f'; 
   var covidMen = '#85bed8';
   var covidWomen = '#dfaf6c';
 
@@ -41,6 +42,9 @@ $( document ).ready(function() {
       deathsByChart,
       historicCasesChart,
       historicDeathsChart;
+
+  var titlePosition = 'center';
+  var chartsHeight = 240;
 
   var sexAndAgeDataArrMen = ['Men'],
       sexAndAgeDataArrWomen = ['Women'];
@@ -150,7 +154,7 @@ $( document ).ready(function() {
         attribution: '<a href="http://mapbox.com">Mapbox</a>'
     }).addTo(map); 
     
-    map.setView([9.58, 10.37], 3);
+    // map.setView([9.58, 10.37], 4);
 
     geojson = L.geoJson(geodata,
               { 
@@ -163,13 +167,14 @@ $( document ).ready(function() {
     var legend = L.control({position: 'bottomleft'});
     legend.onAdd = function(map){
       var div = L.DomUtil.create('div', 'info legend'),
-      grades = [darkest, mediumDark, mediumLight, light, white, otherColor],
+      grades = [darkest, mediumDark, mediumLight, medium,light, lighter, noColor],
       labels = ['ratio over 2.0',
                 'ratio 1.5-1.99',
                 'ratio 1.1-1.49',
                 'ratio .9-1.09',
                 'ratio <.89',
-                'other'];
+                'dfd',
+                'Sex-disaggregated data for both cases and deaths not available'];
 
 
       for (var i = 0; i < grades.length; i++) {
@@ -182,7 +187,7 @@ $( document ).ready(function() {
     };
 
     legend.addTo(map);
-    map.setZoom(1);
+    map.setZoom(2);
 
   } // createMap()
 
@@ -198,7 +203,7 @@ $( document ).ready(function() {
             (1.99 > mortalityRate && mortalityRate > 1.5)  ? mediumDark :
             (1.49 > mortalityRate && mortalityRate > 1.1)  ? mediumLight :
             (1.09 > mortalityRate && mortalityRate > 0.9)  ? light :
-            mortalityRate > 0.89 ? white : otherColor;
+            mortalityRate > 0.89 ? lighter : noColor;
   }
 
   function style(feature) {
@@ -262,10 +267,10 @@ $( document ).ready(function() {
       var layer = e.target;
 
       layer.setStyle({
-          weight: 2,
+          // weight: 2,
           color: '#666',
-          dashArray: '2',
-          fillOpacity: 0.7
+          // dashArray: '2',
+          // fillOpacity: 0.7
       });
       layer.openPopup();
 
@@ -281,7 +286,7 @@ $( document ).ready(function() {
     $('#globalFigures').html('');
     arr.forEach( function(element, index) {
       // $('#globalFigures').append('<div class="col-md-4"><div class="keyfig"><div class="num">'+element['Value']+'</div><div class="indicator">'+element['Indicators']+'</div></div></div>');
-      $('#globalFigures').append('<div class="col-md-4"><div class="keyfig"><span class="num">'+element['Value']+' </span><span class="indicator">' +element['Indicators']+'</span></div></div>');
+      $('#globalFigures').append('<div class="col-md-12 col-xs-6 fig"><div class="keyfig"><span class="num">'+element['Value']+' </span><span class="indicator">' +element['Indicators']+'</span></div></div>');
     }); 
 
   } //generateGlobalFigs
@@ -396,11 +401,11 @@ $( document ).ready(function() {
   
     sexAndAgeChart = c3.generate({
       bindto: '#saddBarchart',
-      size: {height: 200},
+      size: {height: chartsHeight},
       padding: {top: 10},
       title: {
         text: 'Sex-disaggregated data along the COVID-19 clinical pathway',
-        position: 'upper-left'
+        position: titlePosition
       },
       data: {
           x: 'x',
@@ -457,11 +462,11 @@ $( document ).ready(function() {
     // cases by age chart
     casesByChart = c3.generate({
       bindto: '#casesByAge',
-      size: {height: 200},
+      size: {height: chartsHeight},
       padding: {top: 10},
       title: {
         text: 'Cases by age and sex',
-        position: 'upper-left'
+        position: titlePosition
       },
       data: {
           x: 'x',
@@ -469,12 +474,13 @@ $( document ).ready(function() {
           type: 'bar'
       },
       color: {
-        pattern: [covidMen, covidWomen]
+        pattern: [colorMen, colorWomen]
       },
       axis: {
         x: {
           type: 'category',
           tick:{
+            count: 5,
             outer: false,
             multiline: false
           }
@@ -502,11 +508,11 @@ $( document ).ready(function() {
     // deaths by age chart
     deathsByChart = c3.generate({
       bindto: '#deathsByAge',
-      size: {height: 200},
+      size: {height: chartsHeight},
       padding: {top: 10},
       title: {
         text: 'Deaths by age and sex',
-        position: 'center'
+        position: titlePosition
       },
       data: {
           x: 'x',
@@ -514,12 +520,13 @@ $( document ).ready(function() {
           type: 'bar'
       },
       color: {
-        pattern: [covidMen, covidWomen]
+        pattern: [colorMen, colorWomen]
       },
       axis: {
         x: {
           type: 'category',
           tick:{
+            count: 5,
             outer: false,
             multiline: false
           }
@@ -553,11 +560,11 @@ $( document ).ready(function() {
       // cases chart
       historicCasesChart = c3.generate({
         bindto: '#historicCases',
-        size: {height: 200},
+        size: {height: chartsHeight},
         padding: {top: 10},
         title: {
           text: 'Cases - Historical trends',
-          position: 'upper-left'
+          position: titlePosition
         },
         data: {
             x: 'x',
@@ -565,21 +572,24 @@ $( document ).ready(function() {
             columns: [historicXaxis, hCasesMen, hCasesWomen],
         },
         color: {
-          pattern: [covidMen, covidWomen]
+          pattern: [colorMen, colorWomen]
         },
         axis: {
           x: {
             type: 'timeseries',
             localtime: false,
             tick: {
+              count: 5,
               format: '%b %Y',//'%Y-%m-%d',//'%b %Y',
-              multiline: false
+              multiline: false,
+              outer:false
             }
           },
           y: {
             tick: {
               count: 5,
-              format: d3.format('d')
+              format: d3.format('d'),
+              outer:false
             }
           }
         },
@@ -596,11 +606,11 @@ $( document ).ready(function() {
     // deaths chart
       deathsByChart = c3.generate({
         bindto: '#historicDeath',
-        size: {height: 200},
+        size: {height: chartsHeight},
         padding: {top: 10},
         title: {
           text: 'Deaths - Historical trends',
-          position: 'center'
+          position: titlePosition
         },
         data: {
             x: 'x',
@@ -608,21 +618,25 @@ $( document ).ready(function() {
             columns: [historicXaxis, hDeathsMen, hDeathsWomen],
         },
         color: {
-          pattern: [covidMen, covidWomen]
+          pattern: [colorMen, colorWomen]
         },
         axis: {
           x: {
             type: 'timeseries',
             localtime: false,
             tick: {
+              count: 5,
               format: '%b %Y',
-              multiline: false
+              multiline: false,
+              outer:false
+
             }
           },
           y: {
             tick: {
               count: 5,
-              format: d3.format('d')
+              format: d3.format('d'),
+              outer:false
             }
           }
         },
