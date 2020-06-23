@@ -480,7 +480,7 @@ $( document ).ready(function() {
         x: {
           type: 'category',
           tick:{
-            count: 5,
+            // count: 5,
             outer: false,
             multiline: false
           }
@@ -526,7 +526,7 @@ $( document ).ready(function() {
         x: {
           type: 'category',
           tick:{
-            count: 5,
+            // count: 5,
             outer: false,
             multiline: false
           }
