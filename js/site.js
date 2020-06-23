@@ -22,8 +22,7 @@ $( document ).ready(function() {
   var mediumLight = '#E31A1C';
   var medium = '#F17471';//#FC4E2A';
   var light = '#ecba78';//'#FD8D3C';
-  var lighter = '#f7e7b3';
-  var noColor = '#dadada';//'#FFEDA0';
+  var noData = '#dadada';//'#FFEDA0';
 
   var colorMen = '#a84a4a';//'#49707b';
   var colorWomen = '#ecba78';//'#d44e3f'; 
@@ -120,7 +119,6 @@ $( document ).ready(function() {
 
           countries.push(pays.trim());
         });
-        console.log(data[3])
         covidData = data[3];
 
         data[4].forEach( function(element, index) {
@@ -137,9 +135,8 @@ $( document ).ready(function() {
         // console.log(historicData)
         generateGlobalFigs(chiffresCles)
         createMap(geodata)
-
-        
     });
+
   }
 
 
@@ -155,7 +152,7 @@ $( document ).ready(function() {
         attribution: '<a href="http://mapbox.com">Mapbox</a>'
     }).addTo(map); 
     
-    // map.setView([9.58, 10.37], 4);
+    
 
     geojson = L.geoJson(geodata,
               { 
@@ -164,17 +161,17 @@ $( document ).ready(function() {
               }).addTo(map);
 
     map.fitBounds(geojson.getBounds());
+    map.setView([9.58, 10.37], 4);
 
     var legend = L.control({position: 'bottomleft'});
     legend.onAdd = function(map){
       var div = L.DomUtil.create('div', 'info legend'),
-      grades = [darkest, mediumDark, mediumLight, medium,light, lighter, noColor],
-      labels = ['ratio over 2.0',
-                'ratio 1.5-1.99',
-                'ratio 1.1-1.49',
-                'ratio .9-1.09',
-                'ratio <.89',
-                'dfd',
+      grades = [darkest, mediumDark, mediumLight, medium,light, noData],
+      labels = ['Over 2.0',
+                '50-99% higher in men',
+                '10-49% higher in men',
+                '10% lower and 9% higher in men',
+                'Mortality rates are 11% or higher among women',
                 'Sex-disaggregated data for both cases and deaths not available'];
 
 
@@ -203,15 +200,16 @@ $( document ).ready(function() {
     return mortalityRate > 2.0 ? darkest :
             (1.99 > mortalityRate && mortalityRate > 1.5)  ? mediumDark :
             (1.49 > mortalityRate && mortalityRate > 1.1)  ? mediumLight :
-            (1.09 > mortalityRate && mortalityRate > 0.9)  ? light :
-            mortalityRate > 0.89 ? lighter : noColor;
+            (1.09 > mortalityRate && mortalityRate > 0.9)  ? medium :
+            mortalityRate > 0.89 ? light : noData;
   }
+
 
   function style(feature) {
     // use regionDim
     return {
         fillColor: getColor(feature.properties.name),
-        weight: 1,
+        weight: 1.2,
         opacity: 1,
         color: 'white',
         dashArray: '1',
@@ -221,6 +219,7 @@ $( document ).ready(function() {
 
   function mapClicked (e) {
     var layer = e.target ;
+    layer.openPopup();
     graphesPays(layer.feature.properties.name);
   }//mapClicked
 
@@ -269,12 +268,12 @@ $( document ).ready(function() {
       var layer = e.target;
 
       layer.setStyle({
-          // weight: 2,
-          color: '#666',
-          // dashArray: '2',
-          // fillOpacity: 0.7
+          weight: 2,
+          color: '#000',// '#666',
+          dashArray: '3',
+          fillOpacity: 0.8
       });
-      layer.openPopup();
+      // layer.openPopup();
 
   }//highlightFeature
 
@@ -655,10 +654,11 @@ $( document ).ready(function() {
   }//dessinerHistoricCharts
 
   getData();
-    //remove loader and show vis
-  $('.loader').hide();
+  //remove loader and show vis
+
   $('.container').css('opacity', 1);
   $('.container-fluid').css('opacity', 1);
+  $('.loader').hide();
 
 }); //fin
 
