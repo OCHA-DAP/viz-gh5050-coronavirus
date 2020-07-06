@@ -1,15 +1,24 @@
 $( document ).ready(function() {
-  var keyfiguresLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=548681856&single=true&output=csv';
+  var keyfiguresLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D548681856';
   const worldGeojson = 'data/countries.geo.json';
-  var sexAndAgeDataLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=1186067706&single=true&output=csv';
-  var latestLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=1108400769&single=true&output=csv';
-  var historicDataLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=1699147458&single=true&output=csv';
+  var sexAndAgeDataLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D1186067706';
+  var latestLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&tagger-match-all=on&tagger-01-header=country&tagger-01-tag=%23country+%2Bname&tagger-02-header=date+data+is+accurate+until&tagger-02-tag=%23date&tagger-09-header=testing+no+tests+%28men%29&tagger-09-tag=%23indicator+%2Btesting+%2Bm&tagger-10-header=no+tests+%28women%29&tagger-10-tag=%23indicator+%2Btesting+%2Bf&tagger-11-header=number+of+cases+total+no.+of+cases+%28if+disaggregated+by+sex%2C+this+should+be+sum+of+male+%2B+female+cases.+if+not+disaggregated+by+sex%2C+total+number+of+cases%29&tagger-11-tag=%23affected+%2Bcases+%2Ball&tagger-12-header=no.+of+cases+-+men&tagger-12-tag=%23affected+%2Bcases+%2Bm&tagger-13-header=%25+cases+%28men%29&tagger-13-tag=%23affected+%2Bcases+%2Bm+%2Bpct&tagger-14-header=no.+of+cases+-+women&tagger-14-tag=%23affected+%2Bcases+%2Bf&tagger-15-header=%25+cases+%28female%29&tagger-15-tag=%23affected+%2Bcases+%2Bf+%2Bpct&tagger-16-header=ratio+-+male%3Afemale+cases&tagger-16-tag=%23indicator+%2Bcases+%2Bratio&tagger-17-header=number+of+deaths+total+number+of+deaths+%28if+disaggregated+by+sex%2C+this+should+be+sum+of+male+%2B+female+deaths.+if+not+disaggregated+by+sex%2C+total+number+of+deaths%29&tagger-17-tag=%23affected+%2Bkilled+%2Ball&tagger-18-header=no.+of+deaths+-+men&tagger-18-tag=%23affected+%2Bkilled+%2Bm&tagger-19-header=%25+deaths+%28male%29&tagger-19-tag=%23affected+%2Bkilled+%2Bm+%2Bpct&tagger-20-header=no.+of+deaths+-+women&tagger-20-tag=%23affected+%2Bkilled+%2Bf&tagger-21-header=%25+deaths+%28female%29&tagger-21-tag=%23affected+%2Bkilled+%2Bf+%2Bpct&tagger-22-header=ratio+-+male%3Afemale+deaths&tagger-22-tag=%23indicator+%2Bkilled+%2Bratio&tagger-25-header=hospitalisations+hospitalied+total+%28sum+of+male%2Bfemale%29&tagger-25-tag=%23indicator+%2Bhospitalisations+%2Ball&tagger-26-header=total+no+hospitalised+%28male%29&tagger-26-tag=%23indicator+%2Bhospitalizations+%2Bm&tagger-27-header=hospitalised+%28female%29&tagger-27-tag=%23indicator+%2Bhospitalizations+%2Bf&tagger-28-header=%25+hospitalised+%28female%29&tagger-28-tag=%23indicator+%2Bhospitalizations+%2Bf+%2Bpct&tagger-29-header=%25+hospitalised+%28male%29&tagger-29-tag=%23indicator+%2Bhospitalizations+%2Bm+%2Bpct&tagger-32-header=icu+admissions+icu+total+%28sum+of+male+%2B+female%29&tagger-32-tag=%23indicator+%2Bicu+%2Ball&tagger-33-header=icu+male&tagger-33-tag=%23indicator+%2Bicu+%2Bm&tagger-34-header=icu+female&tagger-34-tag=%23indicator+%2Bicu+%2Bf&tagger-35-header=%25+icu+%28female%29&tagger-35-tag=%23indicator+%2Bicu+%2Bf+%2Bpct&tagger-36-header=%25+icu+%28male%29&tagger-36-tag=%23indicator+%2Bicu+%2Bm+%2Bpct&tagger-37-header=healthcare+workers+infected+total+%28sum+of+male+%2B+female%29&tagger-37-tag=%23affected+%2Bcases+%2Bhealthcare+%2Ball&tagger-38-header=healthcare+workers+infected+male&tagger-38-tag=%23affected+%2Bcases+%2Bhealthcare+%2Bm&tagger-39-header=healthcare+workers+infected+female&tagger-39-tag=%23affected+%2Bcases+%2Bhealthcare+%2Bf&tagger-40-header=%25+healthcare+workers+%28male%29&tagger-40-tag=%23affected+%2Bcases+%2Bhealthcare+%2Bm+%2Bpct&tagger-41-header=%25+healthcare+workers+%28female%29&tagger-41-tag=%23affected+%2Bcases+%2Bhealthcare+%2Bf+%2Bpct&tagger-46-header=ratio+-+confirmed+cases+that+have+died+%28m%3Af%29&tagger-46-tag=%23indicator+%2Bratio+%2Bconfirmed_died_cases&header-row=1&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D1108400769';
+  var historicDataLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&tagger-match-all=on&tagger-01-header=country&tagger-01-tag=%23country+%2Bname&tagger-02-header=date+data+is+accurate+until&tagger-02-tag=%23date&tagger-03-header=%25+cases+%28men%29&tagger-03-tag=%23affected+%2Bcases+%2Bm&tagger-04-header=%25+cases+%28female%29&tagger-04-tag=%23affected+%2Bcases+%2Bf&tagger-05-header=%25+deaths+%28male%29&tagger-05-tag=%23affected+%2Bkilled+%2Bm&tagger-06-header=%25+deaths+%28female%29&tagger-06-tag=%23affected+%2Bkilled+%2Bf&header-row=1&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D1699147458';
+  var excludedCountriesLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D1222272179';
+
+  // var keyfiguresLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=548681856&single=true&output=csv';
+  // const worldGeojson = 'data/countries.geo.json';
+  // var sexAndAgeDataLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=1186067706&single=true&output=csv';
+  // var latestLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=1108400769&single=true&output=csv';
+  // var historicDataLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=1699147458&single=true&output=csv';
+  // var excludedCountriesLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=1222272179&single=true&output=csv';
   
   var geodata;
   var sexAndAgeData;
   var covidData;
   var chiffresCles;
   var historicData;
+  var excludesCountries = [];
 
   var map;
 
@@ -78,65 +87,68 @@ $( document ).ready(function() {
       d3.json(worldGeojson),
       d3.csv(sexAndAgeDataLink),
       d3.csv(latestLink),
-      d3.csv(historicDataLink)
+      d3.csv(historicDataLink),
+      d3.csv(excludedCountriesLink)
     ]).then(function(data){
         chiffresCles = data[0];
         geodata = data[1];
 
         data[2].forEach( function(element, index) {
-          element['Country'] = element['Country'].toUpperCase();
-          element['Cases per 100,000 (male)'] = +element['Cases per 100,000 (male)'];
-          element['Cases per 100,000 (female)'] = +element['Cases per 100,000 (female)'];
-          element['Deaths per 100,000 (male)'] = +element['Deaths per 100,000 (male)'];
-          element['Deaths per 100,000 (female)'] = +element['Deaths per 100,000 (female)'];
+          element['#country+name'] = element['#country+name'].toUpperCase();
+          element['#affected+cases+m'] = +element['#affected+cases+m'];
+          element['#affected+cases+f'] = +element['#affected+cases+f'];
+          element['#affected+killed+m'] = +element['#affected+killed+m'];
+          element['#affected+killed+f'] = +element['#affected+killed+f'];
 
-          covidCountries.includes(element['Country']) ? '': covidCountries.push(element['Country']);
+          covidCountries.includes(element['#country+name']) ? '': covidCountries.push(element['#country+name']);
         });
         // console.log(covidCountries)
         sexAndAgeData = data[2];
         
-
         data[3].forEach( function(element, index) {
-          var pays = (element[" Country"]).split('LATEST')[0];
-          element[" Country"] = pays.trim();
-          element[" Ratio - confirmed cases that have died (m:f)"] = +element[" Ratio - confirmed cases that have died (m:f)"]
-          element[" % cases (men)"] = +((element[" % cases (men)"]).split('%')[0]);
-          element[" % cases (female)"] = +((element[" % cases (female)"]).split('%')[0]);
-          element[" % deaths (male)"] = +((element[" % deaths (male)"]).split('%')[0]);
-          element[" % deaths (female)"] = +((element[" % deaths (female)"]).split('%')[0]);
+          var pays = (element["#country+name"]).split('LATEST')[0];
+          element["#country+name"] = pays.trim();
+          element["#indicator+ratio+confirmed_died_cases"] = +element["#indicator+ratio+confirmed_died_cases"]
+          element["#affected+cases+m+pct"] = +((element["#affected+cases+m+pct"]).split('%')[0]);
+          element["#affected+cases+f+pct"] = +((element["#affected+cases+f+pct"]).split('%')[0]);
+          element["#affected+killed+m+pct"] = +((element["#affected+killed+m+pct"]).split('%')[0]);
+          element["#affected+killed+f+pct"] = +((element["#affected+killed+f+pct"]).split('%')[0]);
 
-          element["Testing No tests (men)"] = +element["Testing No tests (men)"];
-          element[" No tests (women)"] = +element[" No tests (women)"];
+          element["#indicator+testing+m"] = +element["#indicator+testing+m"];
+          element["#indicator+testing+f"] = +element["#indicator+testing+f"];
           
-          element[" % Hospitalised (male)"] = +((element[" % Hospitalised (male)"]).split('%')[0]);
-          element[" % Hospitalised (female)"] = +((element[" % Hospitalised (female)"]).split('%')[0]);
+          element["#indicator+hospitalizations+m+pct"] = +((element["#indicator+hospitalizations+m+pct"]).split('%')[0]);
+          element["#indicator+hospitalizations+f+pct"] = +((element["#indicator+hospitalizations+f+pct"]).split('%')[0]);
           
-          element[" % ICU (male)"] = +((element[" % ICU (male)"]).split('%')[0]);
-          element[" % ICU (female)"] = +((element[" % ICU (female)"]).split('%')[0]);
+          element["#indicator+icu+m+pct"] = +((element["#indicator+icu+m+pct"]).split('%')[0]);
+          element["#indicator+icu+f+pct"] = +((element["#indicator+icu+f+pct"]).split('%')[0]);
           
-          element[" % Healthcare workers (female)"] = +((element[" % Healthcare workers (female)"]).split('%')[0]);
-          element[" % Healthcare workers (male)"] = +((element[" % Healthcare workers (male)"]).split('%')[0]);
+          element["#affected+cases+healthcare+f+pct"] = +((element["#affected+cases+healthcare+f+pct"]).split('%')[0]);
+          element["#affected+cases+healthcare+m+pct"] = +((element["#affected+cases+healthcare+m+pct"]).split('%')[0]);
 
           countries.push(pays.trim());
         });
         covidData = data[3];
 
         data[4].forEach( function(element, index) {
-          element[' Country'] = element[' Country'].toUpperCase();
-          element[' Date data is accurate until'] = new Date(element[' Date data is accurate until']);
-          element[' % cases (men)'] = +((element[" % cases (men)"]).split('%')[0]);
-          element[' % cases (female)'] = +((element[" % cases (female)"]).split('%')[0]);
+          element['#country+name'] = element['#country+name'].toUpperCase();
+          element['#date'] = new Date(element['#date']);
+          element['#affected+cases+m'] = +((element["#affected+cases+m"]).split('%')[0]);
+          element['#affected+cases+f'] = +((element["#affected+cases+f"]).split('%')[0]);
 
-          element[' % deaths (male)'] = +((element[" % deaths (male)"]).split('%')[0]);
-          element[' % deaths (female)'] = +((element[" % deaths (female)"]).split('%')[0]);
+          element['#affected+killed+m'] = +((element["#affected+killed+m"]).split('%')[0]);
+          element['#affected+killed+f'] = +((element["#affected+killed+f"]).split('%')[0]);
         });
         
         historicData = data[4];
-        // console.log(historicData)
+        data[5].forEach( function(element, index) {
+          excludesCountries.push((element["#country+name"]).toUpperCase());
+        });
+
         generateGlobalFigs(chiffresCles)
         createMap(geodata)
     });
-
+    
   }
 
 
@@ -194,7 +206,7 @@ $( document ).ready(function() {
     var mortalityRate = 0;
     if (countries.includes(country)) {
       covidData.forEach( function(element, index) {
-        element[" Country"] == country ? mortalityRate = element[" Ratio - confirmed cases that have died (m:f)"]: '';
+        element["#country+name"] == country ? mortalityRate = element["#indicator+ratio+confirmed_died_cases"]: '';
       });
     } 
     return mortalityRate > 2.0 ? darkest :
@@ -244,12 +256,12 @@ $( document ).ready(function() {
 
     if (countries.includes(pays)) {
       covidData.forEach( function(element, index) {
-        if (element[" Country"] == pays) {
-          casesMen = element[" % cases (men)"];
-          casesWomen = element[" % cases (female)"];
-          deathsMen = element[" % deaths (male)"];
-          deathsWomen = element[" % deaths (female)"];
-          ratio = element[" Ratio - confirmed cases that have died (m:f)"];
+        if (element["#country+name"] == pays) {
+          casesMen = element["#affected+cases+m+pct"]; //#affected+cases+m+pct
+          casesWomen = element["#affected+cases+f+pct"];
+          deathsMen = element["#affected+killed+m+pct"]; //#affected+killed+m+pct
+          deathsWomen = element["#affected+killed+f+pct"];
+          ratio = element["#indicator+ratio+confirmed_died_cases"];
         }
       });
       ratio == 0 ? ratio = 'NA' : '';
@@ -286,8 +298,7 @@ $( document ).ready(function() {
   function generateGlobalFigs (arr) {
     $('#globalFigures').html('');
     arr.forEach( function(element, index) {
-      // $('#globalFigures').append('<div class="col-md-4"><div class="keyfig"><div class="num">'+element['Value']+'</div><div class="indicator">'+element['Indicators']+'</div></div></div>');
-      $('#globalFigures').append('<div class="col-md-12 col-xs-6 fig"><div class="keyfig"><span class="num">'+element['Value']+' </span><span class="indicator">' +element['Indicators']+'</span></div></div>');
+      $('#globalFigures').append('<div class="col-md-12 col-xs-6 fig"><div class="keyfig"><span class="num">'+element['#value']+' </span><span class="indicator">' +element['#indicator+name']+'</span></div></div>');
     }); 
 
   } //generateGlobalFigs
@@ -301,7 +312,7 @@ $( document ).ready(function() {
 
     pays = pays.toUpperCase();
 
-    if (countries.includes(pays)) {
+    if (countries.includes(pays) && !excludesCountries.includes(pays)) {
       getSexAndAgeData(pays);
       dessinerGrapheSexAndAge();
 
@@ -322,20 +333,20 @@ $( document ).ready(function() {
     sexAndAgeDataArrWomen = ['Women'];
 
     covidData.forEach( function(element, index) {
-      if (element[" Country"] == pays) {
-        sexAndAgeDataArrMen.push(element["Testing No tests (men)"]);
-        sexAndAgeDataArrMen.push(element[" % cases (men)"]);
-        sexAndAgeDataArrMen.push(element[" % Healthcare workers (male)"]);
-        sexAndAgeDataArrMen.push(element[" % Hospitalised (male)"]);
-        sexAndAgeDataArrMen.push(element[" % ICU (male)"]);
-        sexAndAgeDataArrMen.push(element[" % deaths (male)"]); 
+      if (element["#country+name"] == pays) {
+        sexAndAgeDataArrMen.push(element["#indicator+testing+m"]);
+        sexAndAgeDataArrMen.push(element["#affected+cases+m+pct"]);
+        sexAndAgeDataArrMen.push(element["#affected+cases+healthcare+m+pct"]);
+        sexAndAgeDataArrMen.push(element["#indicator+hospitalizations+m+pct"]);
+        sexAndAgeDataArrMen.push(element["#indicator+icu+m+pct"]);
+        sexAndAgeDataArrMen.push(element["#affected+killed+m+pct"]); 
 
-        sexAndAgeDataArrWomen.push(element[" No tests (women)"]);
-        sexAndAgeDataArrWomen.push(element[" % cases (female)"]);
-        sexAndAgeDataArrWomen.push(element[" % Healthcare workers (female)"]);
-        sexAndAgeDataArrWomen.push(element[" % Hospitalised (female)"]);
-        sexAndAgeDataArrWomen.push(element[" % ICU (female)"]);
-        sexAndAgeDataArrWomen.push(element[" % deaths (female)"]);
+        sexAndAgeDataArrWomen.push(element["#indicator+testing+f"]);
+        sexAndAgeDataArrWomen.push(element["#affected+cases+f+pct"]);
+        sexAndAgeDataArrWomen.push(element["#affected+cases+healthcare+f+pct"]);
+        sexAndAgeDataArrWomen.push(element["#indicator+hospitalizations+f+pct"]);
+        sexAndAgeDataArrWomen.push(element["#indicator+icu+m+pct"]);
+        sexAndAgeDataArrWomen.push(element["#affected+killed+f+pct"]);
       }
     });
   }
@@ -350,18 +361,19 @@ $( document ).ready(function() {
     deathsWomen = ['Deaths per 100,000 (female)'];
 
     var countryData = sexAndAgeData.filter(function(d){
-      return d.Country == pays;
+      return d['#country+name'] == pays;
     })
 
     countryData.forEach( function(element, index) {
-      covidXaxis.push(element['Age Range']);
+      covidXaxis.push(element['#indicator+age']);
 
-      casesMen.push(element['Cases per 100,000 (male)']);
-      casesWomen.push(element['Cases per 100,000 (female)']);
+      casesMen.push(element['#affected+cases+m']);
+      casesWomen.push(element['#affected+cases+f']);
 
-      deathsMen.push(element['Deaths per 100,000 (male)']);
-      deathsWomen.push(element['Deaths per 100,000 (female)']);
+      deathsMen.push(element['#affected+killed+m']);
+      deathsWomen.push(element['#affected+killed+f']);
     });
+
 
   }//getCovidSexAndAgeData
 
@@ -374,25 +386,25 @@ $( document ).ready(function() {
     hDeathsMen = [' % deaths (male)'];
     hDeathsWomen = [' % deaths (female)'];
     var countryData = historicData.filter(function(d){
-      d[' Date data is accurate until'] = new Date(d[' Date data is accurate until']);
-      return d[' Country'] == pays;
+      d['#date'] = new Date(d['#date']);
+      return d['#country+name'] == pays;
     });
 
     countryData.forEach( function(element, index) {
-      var d = new Date(element[' Date data is accurate until']);
+      var d = new Date(element['#date']);
       var date = d.getFullYear() +'-'+(d.getMonth() + 1) +'-'+d.getDate();
-      element[' Date data is accurate until'] = date;
+      element['#date'] = date;
     });
 
     countryData.sort(date_sort);
 
     countryData.forEach( function(element, index) {
-      historicXaxis.push(element[' Date data is accurate until']);
-      hCasesMen.push(element[' % cases (men)']);
-      hCasesWomen.push(element[' % cases (female)']);
+      historicXaxis.push(element['#date']);
+      hCasesMen.push(element['#affected+cases+m']);
+      hCasesWomen.push(element['#affected+cases+f']);
 
-      hDeathsMen.push(element[' % deaths (male)']);
-      hDeathsWomen.push(element[' % deaths (female)']);
+      hDeathsMen.push(element['#affected+killed+m']);
+      hDeathsWomen.push(element['#affected+killed+f']);
     });
 
   }//getHistoricData
@@ -458,99 +470,97 @@ $( document ).ready(function() {
      // $('#covidCharts').html('');
      $('#covidCharts').append('<div class="row"><div class="col-md-6"><div id="casesByAge"></div></div><div class="col-md-6"><div id="deathsByAge"></div></div></div>');
 
-     // $('#covidCharts').append('<div class="row"><h3>Covid cases and deaths by age and sex</h3><div class="col-md-6"><div id="casesByAge"></div></div><div class="col-md-6"><div id="deathsByAge"></div></div></div>');
-
-    // cases by age chart
-    casesByChart = c3.generate({
-      bindto: '#casesByAge',
-      size: {height: chartsHeight},
-      padding: {top: 10},
-      title: {
-        text: 'Cases by age and sex',
-        position: titlePosition
-      },
-      data: {
-          x: 'x',
-          columns: [covidXaxis, casesMen, casesWomen],
-          type: 'bar'
-      },
-      color: {
-        pattern: [colorMen, colorWomen]
-      },
-      axis: {
-        x: {
-          type: 'category',
-          tick:{
-            // count: 5,
-            outer: false,
-            multiline: false
+      // cases by age chart
+     casesByChart = c3.generate({
+        bindto: '#casesByAge',
+        size: {height: chartsHeight},
+        padding: {top: 10},
+        title: {
+          text: 'Cases by age and sex',
+          position: titlePosition
+        },
+        data: {
+            x: 'x',
+            columns: [covidXaxis, casesMen, casesWomen],
+            type: 'bar'
+        },
+        color: {
+          pattern: [colorMen, colorWomen]
+        },
+        axis: {
+          x: {
+            type: 'category',
+            tick:{
+              // count: 5,
+              outer: false,
+              multiline: false
+            }
+          },
+          y: {
+            tick: {
+              format: d3.format(".2s"),
+              count: 5,
+              outer:false
+            }
           }
         },
-        y: {
-          tick: {
-            format: d3.format(".2s"),
-            count: 5,
-            outer:false
-          }
-        }
-      },
-      grid: {
-        y: {
-          show: true
-        }
-      },
-      bar: {
-          width: {
-              ratio: 0.5 // this makes bar width 50% of length between ticks
-          }
-      }
-    });
-
-    // deaths by age chart
-    deathsByChart = c3.generate({
-      bindto: '#deathsByAge',
-      size: {height: chartsHeight},
-      padding: {top: 10},
-      title: {
-        text: 'Deaths by age and sex',
-        position: titlePosition
-      },
-      data: {
-          x: 'x',
-          columns: [covidXaxis, deathsMen, deathsWomen],
-          type: 'bar'
-      },
-      color: {
-        pattern: [colorMen, colorWomen]
-      },
-      axis: {
-        x: {
-          type: 'category',
-          tick:{
-            // count: 5,
-            outer: false,
-            multiline: false
+        grid: {
+          y: {
+            show: true
           }
         },
-        y: {
-          tick: {
-            format: d3.format(".2s"),
-            count: 5,
-            outer:false
-          }
+        bar: {
+            width: {
+                ratio: 0.5 // this makes bar width 50% of length between ticks
+            }
         }
-      },
-      grid: {
-        y: {
-          show: true
-        }
-      },
-      bar: {
-          width: {
-              ratio: 0.5 // this makes bar width 50% of length between ticks
+      });
+
+      // deaths by age chart
+      deathsByChart = c3.generate({
+        bindto: '#deathsByAge',
+        size: {height: chartsHeight},
+        padding: {top: 10},
+        title: {
+          text: 'Deaths by age and sex',
+          position: titlePosition
+        },
+        data: {
+            x: 'x',
+            columns: [covidXaxis, deathsMen, deathsWomen],
+            type: 'bar'
+        },
+        color: {
+          pattern: [colorMen, colorWomen]
+        },
+        axis: {
+          x: {
+            type: 'category',
+            tick:{
+              // count: 5,
+              outer: false,
+              multiline: false
+            }
+          },
+          y: {
+            tick: {
+              format: d3.format(".2s"),
+              count: 5,
+              outer:false
+            }
           }
-      }
-    });
+        },
+        grid: {
+          y: {
+            show: true
+          }
+        },
+        bar: {
+            width: {
+                ratio: 0.5 // this makes bar width 50% of length between ticks
+            }
+        }
+      });
 
   }//dessinerCovidCharts
 
@@ -604,7 +614,7 @@ $( document ).ready(function() {
         }
       });
 
-    // deaths chart
+      // deaths chart
       deathsByChart = c3.generate({
         bindto: '#historicDeath',
         size: {height: chartsHeight},
@@ -656,8 +666,8 @@ $( document ).ready(function() {
   getData();
   //remove loader and show vis
 
-  $('.container').css('opacity', 1);
-  $('.container-fluid').css('opacity', 1);
+  $('main').css('opacity', 1);
+  // $('.container-fluid').css('opacity', 1);
   $('.loader').hide();
 
 }); //fin

@@ -45,13 +45,13 @@ body {
 
 }
 
-.container {
+main {
   opacity: 0;
 }
 
-.container-fluid {
+/*.container-fluid {
   opacity: 0;
-}
+}*/
 
 
 h2{
