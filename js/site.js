@@ -1,11 +1,12 @@
 $( document ).ready(function() {
-  var keyfiguresLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D548681856';
+  var keyfiguresLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D548681856&force=on';
   const worldGeojson = 'data/countries.geo.json';
-  var sexAndAgeDataLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D1186067706';
-  var latestLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&tagger-match-all=on&tagger-01-header=country&tagger-01-tag=%23country+%2Bname&tagger-02-header=date+data+is+accurate+until&tagger-02-tag=%23date&tagger-09-header=testing+no+tests+%28men%29&tagger-09-tag=%23indicator+%2Btesting+%2Bm&tagger-10-header=no+tests+%28women%29&tagger-10-tag=%23indicator+%2Btesting+%2Bf&tagger-11-header=number+of+cases+total+no.+of+cases+%28if+disaggregated+by+sex%2C+this+should+be+sum+of+male+%2B+female+cases.+if+not+disaggregated+by+sex%2C+total+number+of+cases%29&tagger-11-tag=%23affected+%2Bcases+%2Ball&tagger-12-header=no.+of+cases+-+men&tagger-12-tag=%23affected+%2Bcases+%2Bm&tagger-13-header=%25+cases+%28men%29&tagger-13-tag=%23affected+%2Bcases+%2Bm+%2Bpct&tagger-14-header=no.+of+cases+-+women&tagger-14-tag=%23affected+%2Bcases+%2Bf&tagger-15-header=%25+cases+%28female%29&tagger-15-tag=%23affected+%2Bcases+%2Bf+%2Bpct&tagger-16-header=ratio+-+male%3Afemale+cases&tagger-16-tag=%23indicator+%2Bcases+%2Bratio&tagger-17-header=number+of+deaths+total+number+of+deaths+%28if+disaggregated+by+sex%2C+this+should+be+sum+of+male+%2B+female+deaths.+if+not+disaggregated+by+sex%2C+total+number+of+deaths%29&tagger-17-tag=%23affected+%2Bkilled+%2Ball&tagger-18-header=no.+of+deaths+-+men&tagger-18-tag=%23affected+%2Bkilled+%2Bm&tagger-19-header=%25+deaths+%28male%29&tagger-19-tag=%23affected+%2Bkilled+%2Bm+%2Bpct&tagger-20-header=no.+of+deaths+-+women&tagger-20-tag=%23affected+%2Bkilled+%2Bf&tagger-21-header=%25+deaths+%28female%29&tagger-21-tag=%23affected+%2Bkilled+%2Bf+%2Bpct&tagger-22-header=ratio+-+male%3Afemale+deaths&tagger-22-tag=%23indicator+%2Bkilled+%2Bratio&tagger-25-header=hospitalisations+hospitalied+total+%28sum+of+male%2Bfemale%29&tagger-25-tag=%23indicator+%2Bhospitalisations+%2Ball&tagger-26-header=total+no+hospitalised+%28male%29&tagger-26-tag=%23indicator+%2Bhospitalizations+%2Bm&tagger-27-header=hospitalised+%28female%29&tagger-27-tag=%23indicator+%2Bhospitalizations+%2Bf&tagger-28-header=%25+hospitalised+%28female%29&tagger-28-tag=%23indicator+%2Bhospitalizations+%2Bf+%2Bpct&tagger-29-header=%25+hospitalised+%28male%29&tagger-29-tag=%23indicator+%2Bhospitalizations+%2Bm+%2Bpct&tagger-32-header=icu+admissions+icu+total+%28sum+of+male+%2B+female%29&tagger-32-tag=%23indicator+%2Bicu+%2Ball&tagger-33-header=icu+male&tagger-33-tag=%23indicator+%2Bicu+%2Bm&tagger-34-header=icu+female&tagger-34-tag=%23indicator+%2Bicu+%2Bf&tagger-35-header=%25+icu+%28female%29&tagger-35-tag=%23indicator+%2Bicu+%2Bf+%2Bpct&tagger-36-header=%25+icu+%28male%29&tagger-36-tag=%23indicator+%2Bicu+%2Bm+%2Bpct&tagger-37-header=healthcare+workers+infected+total+%28sum+of+male+%2B+female%29&tagger-37-tag=%23affected+%2Bcases+%2Bhealthcare+%2Ball&tagger-38-header=healthcare+workers+infected+male&tagger-38-tag=%23affected+%2Bcases+%2Bhealthcare+%2Bm&tagger-39-header=healthcare+workers+infected+female&tagger-39-tag=%23affected+%2Bcases+%2Bhealthcare+%2Bf&tagger-40-header=%25+healthcare+workers+%28male%29&tagger-40-tag=%23affected+%2Bcases+%2Bhealthcare+%2Bm+%2Bpct&tagger-41-header=%25+healthcare+workers+%28female%29&tagger-41-tag=%23affected+%2Bcases+%2Bhealthcare+%2Bf+%2Bpct&tagger-46-header=ratio+-+confirmed+cases+that+have+died+%28m%3Af%29&tagger-46-tag=%23indicator+%2Bratio+%2Bconfirmed_died_cases&header-row=1&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D1108400769';
-  var historicDataLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&tagger-match-all=on&tagger-01-header=country&tagger-01-tag=%23country+%2Bname&tagger-02-header=date+data+is+accurate+until&tagger-02-tag=%23date&tagger-03-header=%25+cases+%28men%29&tagger-03-tag=%23affected+%2Bcases+%2Bm&tagger-04-header=%25+cases+%28female%29&tagger-04-tag=%23affected+%2Bcases+%2Bf&tagger-05-header=%25+deaths+%28male%29&tagger-05-tag=%23affected+%2Bkilled+%2Bm&tagger-06-header=%25+deaths+%28female%29&tagger-06-tag=%23affected+%2Bkilled+%2Bf&header-row=1&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D1699147458';
-  var excludedCountriesLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D1222272179';
-
+  var sexAndAgeDataLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D1186067706&force=on';
+  var latestLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&tagger-match-all=on&tagger-01-header=country&tagger-01-tag=%23country+%2Bname&tagger-02-header=date+data+is+accurate+until&tagger-02-tag=%23date&tagger-09-header=testing+no+tests+%28men%29&tagger-09-tag=%23indicator+%2Btesting+%2Bm&tagger-10-header=no+tests+%28women%29&tagger-10-tag=%23indicator+%2Btesting+%2Bf&tagger-11-header=number+of+cases+total+no.+of+cases+%28if+disaggregated+by+sex%2C+this+should+be+sum+of+male+%2B+female+cases.+if+not+disaggregated+by+sex%2C+total+number+of+cases%29&tagger-11-tag=%23affected+%2Bcases+%2Ball&tagger-12-header=no.+of+cases+-+men&tagger-12-tag=%23affected+%2Bcases+%2Bm&tagger-13-header=%25+cases+%28men%29&tagger-13-tag=%23affected+%2Bcases+%2Bm+%2Bpct&tagger-14-header=no.+of+cases+-+women&tagger-14-tag=%23affected+%2Bcases+%2Bf&tagger-15-header=%25+cases+%28female%29&tagger-15-tag=%23affected+%2Bcases+%2Bf+%2Bpct&tagger-16-header=ratio+-+male%3Afemale+cases&tagger-16-tag=%23indicator+%2Bcases+%2Bratio&tagger-17-header=number+of+deaths+total+number+of+deaths+%28if+disaggregated+by+sex%2C+this+should+be+sum+of+male+%2B+female+deaths.+if+not+disaggregated+by+sex%2C+total+number+of+deaths%29&tagger-17-tag=%23affected+%2Bkilled+%2Ball&tagger-18-header=no.+of+deaths+-+men&tagger-18-tag=%23affected+%2Bkilled+%2Bm&tagger-19-header=%25+deaths+%28male%29&tagger-19-tag=%23affected+%2Bkilled+%2Bm+%2Bpct&tagger-20-header=no.+of+deaths+-+women&tagger-20-tag=%23affected+%2Bkilled+%2Bf&tagger-21-header=%25+deaths+%28female%29&tagger-21-tag=%23affected+%2Bkilled+%2Bf+%2Bpct&tagger-22-header=ratio+-+male%3Afemale+deaths&tagger-22-tag=%23indicator+%2Bkilled+%2Bratio&tagger-25-header=hospitalisations+hospitalied+total+%28sum+of+male%2Bfemale%29&tagger-25-tag=%23indicator+%2Bhospitalisations+%2Ball&tagger-26-header=total+no+hospitalised+%28male%29&tagger-26-tag=%23indicator+%2Bhospitalizations+%2Bm&tagger-27-header=hospitalised+%28female%29&tagger-27-tag=%23indicator+%2Bhospitalizations+%2Bf&tagger-28-header=%25+hospitalised+%28female%29&tagger-28-tag=%23indicator+%2Bhospitalizations+%2Bf+%2Bpct&tagger-29-header=%25+hospitalised+%28male%29&tagger-29-tag=%23indicator+%2Bhospitalizations+%2Bm+%2Bpct&tagger-32-header=icu+admissions+icu+total+%28sum+of+male+%2B+female%29&tagger-32-tag=%23indicator+%2Bicu+%2Ball&tagger-33-header=icu+male&tagger-33-tag=%23indicator+%2Bicu+%2Bm&tagger-34-header=icu+female&tagger-34-tag=%23indicator+%2Bicu+%2Bf&tagger-35-header=%25+icu+%28female%29&tagger-35-tag=%23indicator+%2Bicu+%2Bf+%2Bpct&tagger-36-header=%25+icu+%28male%29&tagger-36-tag=%23indicator+%2Bicu+%2Bm+%2Bpct&tagger-37-header=healthcare+workers+infected+total+%28sum+of+male+%2B+female%29&tagger-37-tag=%23affected+%2Bcases+%2Bhealthcare+%2Ball&tagger-38-header=healthcare+workers+infected+male&tagger-38-tag=%23affected+%2Bcases+%2Bhealthcare+%2Bm&tagger-39-header=healthcare+workers+infected+female&tagger-39-tag=%23affected+%2Bcases+%2Bhealthcare+%2Bf&tagger-40-header=%25+healthcare+workers+%28male%29&tagger-40-tag=%23affected+%2Bcases+%2Bhealthcare+%2Bm+%2Bpct&tagger-41-header=%25+healthcare+workers+%28female%29&tagger-41-tag=%23affected+%2Bcases+%2Bhealthcare+%2Bf+%2Bpct&tagger-46-header=ratio+-+confirmed+cases+that+have+died+%28m%3Af%29&tagger-46-tag=%23indicator+%2Bratio+%2Bconfirmed_died_cases&header-row=1&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D1108400769&force=on';
+  var historicDataLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&tagger-match-all=on&tagger-01-header=country&tagger-01-tag=%23country+%2Bname&tagger-02-header=date+data+is+accurate+until&tagger-02-tag=%23date&tagger-03-header=%25+cases+%28men%29&tagger-03-tag=%23affected+%2Bcases+%2Bm&tagger-04-header=%25+cases+%28female%29&tagger-04-tag=%23affected+%2Bcases+%2Bf&tagger-05-header=%25+deaths+%28male%29&tagger-05-tag=%23affected+%2Bkilled+%2Bm&tagger-06-header=%25+deaths+%28female%29&tagger-06-tag=%23affected+%2Bkilled+%2Bf&header-row=1&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D1699147458&force=on';
+  var excludedCountriesLink = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D1222272179&force=on';
+  var descriptionURL = 'https://proxy.hxlstandard.org/data.csv?dest=data_edit&strip-headers=on&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1V-XFX31KC4u8JOX_JOOOFOynE0oXwcvdO2RBB31mpwQ%2Fedit%23gid%3D1488814450&force=on';
+  
   // var keyfiguresLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=548681856&single=true&output=csv';
   // const worldGeojson = 'data/countries.geo.json';
   // var sexAndAgeDataLink = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRE_aFWz6CKaQS0sSuGWUdklTcC9_Q7k31HYUFBw3GpC_zQxHx1_8NrYY83giC-oQhoCTB6zoiRnBWM/pub?gid=1186067706&single=true&output=csv';
@@ -19,6 +20,7 @@ $( document ).ready(function() {
   var chiffresCles;
   var historicData;
   var excludesCountries = [];
+  var descriptionText = " ";
 
   var map;
 
@@ -76,8 +78,8 @@ $( document ).ready(function() {
       hDeathsWomen = [];
 
   var date_sort = function (d1, d2) {
-      if (d1[' Date data is accurate until'] > d2[' Date data is accurate until']) return 1;
-      if (d1[' Date data is accurate until'] < d2[' Date data is accurate until']) return -1;
+      if (d1['#date'] > d2['#date']) return 1;
+      if (d1['#date'] < d2['#date']) return -1;
       return 0;
     }
 
@@ -88,7 +90,8 @@ $( document ).ready(function() {
       d3.csv(sexAndAgeDataLink),
       d3.csv(latestLink),
       d3.csv(historicDataLink),
-      d3.csv(excludedCountriesLink)
+      d3.csv(excludedCountriesLink),
+      d3.csv(descriptionURL)
     ]).then(function(data){
         chiffresCles = data[0];
         geodata = data[1];
@@ -128,6 +131,7 @@ $( document ).ready(function() {
 
           countries.push(pays.trim());
         });
+        console.log(countries)
         covidData = data[3];
 
         data[4].forEach( function(element, index) {
@@ -144,13 +148,17 @@ $( document ).ready(function() {
         data[5].forEach( function(element, index) {
           excludesCountries.push((element["#country+name"]).toUpperCase());
         });
-
+        descriptionText = data[6];
+        generateDescription();
         generateGlobalFigs(chiffresCles)
         createMap(geodata)
     });
     
   }
 
+  function generateDescription() {
+    $('#desc span').text(descriptionText[0]['#description']);
+  } //generateDescription
 
   function createMap (geodata) {
     map = L.map('map',
@@ -178,7 +186,7 @@ $( document ).ready(function() {
     var legend = L.control({position: 'bottomleft'});
     legend.onAdd = function(map){
       var div = L.DomUtil.create('div', 'info legend'),
-      grades = [darkest, mediumDark, mediumLight, medium,light, noData],
+      grades = [darkest, mediumDark, mediumLight, medium,light, 'white'],
       labels = ['Over 2.0',
                 '50-99% higher in men',
                 '10-49% higher in men',
@@ -201,19 +209,22 @@ $( document ).ready(function() {
 
   } // createMap()
 
-  function getColor(country) {
-    country = country.toUpperCase();
+  function getColor(cntry) {
+    var country = cntry.toUpperCase();
     var mortalityRate = 0;
     if (countries.includes(country)) {
       covidData.forEach( function(element, index) {
         element["#country+name"] == country ? mortalityRate = element["#indicator+ratio+confirmed_died_cases"]: '';
       });
     } 
+    // else {
+    //   mortalityRate = "NA";
+    // }
     return mortalityRate > 2.0 ? darkest :
             (1.99 > mortalityRate && mortalityRate > 1.5)  ? mediumDark :
             (1.49 > mortalityRate && mortalityRate > 1.1)  ? mediumLight :
             (1.09 > mortalityRate && mortalityRate > 0.9)  ? medium :
-            mortalityRate > 0.89 ? light : noData;
+            mortalityRate > 0.89 ? light : 'white';
   }
 
 
@@ -269,7 +280,7 @@ $( document ).ready(function() {
       pop += "<p>Deaths in men/women (%): "+deathsMen+"/"+deathsWomen+"</p>";
       pop += "<p>Ratio deaths among confirmed cases in men-women: "+ratio+"</p>";
     } else {
-      pop += "<span> Data partially available</span>"
+      pop += "<span>Country data not yet collected</span>"
     }
 
     return pop; 
@@ -305,14 +316,18 @@ $( document ).ready(function() {
 
 
   function graphesPays (pays) {
-    $('.country').html('');
-    $('.country').append("<h2>"+pays+"</h2>");
-    $('#covidCharts').html('');
-    $('#historicChart').html('');
+    // $('.country').html('');
+    // $('.country').append("<h2>"+pays+"</h2>");
+    // $('#covidCharts').html('');
+    // $('#historicChart').html('');
 
     pays = pays.toUpperCase();
 
     if (countries.includes(pays) && !excludesCountries.includes(pays)) {
+      $('.country').html('');
+      $('.country').append("<h2>"+pays+"</h2>");
+      $('#covidCharts').html('');
+      $('#historicChart').html('');
       getSexAndAgeData(pays);
       dessinerGrapheSexAndAge();
 
