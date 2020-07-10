@@ -147,6 +147,9 @@ p, span{
     opacity: 1;
 }
 
+.legend p {
+  margin:0;
+}
 
 .container-fluid{
   background-color: #353535;

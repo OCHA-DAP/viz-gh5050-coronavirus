@@ -29,10 +29,10 @@ $( document ).ready(function() {
 
   // colors 
   var darkest = '#772d2b';//'#800026';
-  var mediumDark = '#a84a4a';//#FEB24C' ;
-  var mediumLight = '#E31A1C';
-  var medium = '#F17471';//#FC4E2A';
-  var light = '#ecba78';//'#FD8D3C';
+  var mediumDark = '#a84a4a';//#FEB24C' ;#a84a4a
+  var mediumLight = '#F17471';//'#E31A1C';#F17471
+  var medium = '#ecba78';//'#F17471';//#FC4E2A';
+  var light = '#f7e7b3';//'#ecba78';//'#FD8D3C';
   var noData = '#dadada';//'#FFEDA0';
 
   var colorMen = '#a84a4a';//'#49707b';
@@ -186,15 +186,16 @@ $( document ).ready(function() {
     var legend = L.control({position: 'bottomleft'});
     legend.onAdd = function(map){
       var div = L.DomUtil.create('div', 'info legend'),
-      grades = [darkest, mediumDark, mediumLight, medium,light, 'white'],
-      labels = ['Over 2.0',
-                '50-99% higher in men',
-                '10-49% higher in men',
-                '10% lower and 9% higher in men',
-                'Mortality rates are 11% or higher among women',
-                'Sex-disaggregated data for both cases and deaths not available'];
+      grades = [darkest, mediumDark, mediumLight, medium,light, noData,'white'],
+      labels = ['2.0 and higher',
+                '1.5-1.99',
+                '1.1-1.49',
+                '.09-1.09',
+                'Under .09 ',
+                'Sex-disaggregated data for both cases and deaths not available',
+                'Country data not yet collected'];
 
-
+      div.innerHTML += '<p>Proportion of deaths in confirmed cases (Male:female ratio)</p';
       for (var i = 0; i < grades.length; i++) {
         div.innerHTML += 
             '<i style="background:' + grades[i] + '"></i> ' +
@@ -217,14 +218,15 @@ $( document ).ready(function() {
         element["#country+name"] == country ? mortalityRate = element["#indicator+ratio+confirmed_died_cases"]: '';
       });
     } 
-    // else {
-    //   mortalityRate = "NA";
-    // }
+    else {
+      mortalityRate = "NA";
+    }
     return mortalityRate > 2.0 ? darkest :
             (1.99 > mortalityRate && mortalityRate > 1.5)  ? mediumDark :
             (1.49 > mortalityRate && mortalityRate > 1.1)  ? mediumLight :
             (1.09 > mortalityRate && mortalityRate > 0.9)  ? medium :
-            mortalityRate > 0.89 ? light : 'white';
+            mortalityRate > 0.89 ? light : 
+            mortalityRate == "NA" ? 'white' : noData;
   }
 
 
