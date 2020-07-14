@@ -333,8 +333,8 @@ $( document ).ready(function() {
       getSexAndAgeData(pays);
       dessinerGrapheSexAndAge();
 
-      getHistoricData(pays);
-      dessinerHistoricCharts()
+      // getHistoricData(pays);
+      // dessinerHistoricCharts()
     } 
     
     if (covidCountries.includes(pays)) {
